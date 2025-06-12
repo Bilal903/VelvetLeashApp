@@ -1,7 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { StatusBar, StyleSheet } from 'react-native';
+import { StatusBar } from 'react-native';
+import './global.css';
 import { RootStackParamList } from './src/navigation/types';
 import LocationScreen from './src/screens/LocationScreen';
 import SelectServiceScreen from './src/screens/SelectServiceScreen';
@@ -57,9 +58,5 @@ function App(): React.JSX.Element {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  // No specific styles for App component yet, but keeping it for future use.
-});
 
 export default App;

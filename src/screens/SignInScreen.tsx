@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
-import { colors } from '../theme/theme';
 
 const { width, height } = Dimensions.get('window');
 
@@ -10,162 +9,91 @@ const SignInScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-white items-center">
       {/* Top Left Logo */}
-      <View style={styles.logoContainer}>
-        <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
-        <Text style={styles.appName}>Velvet Leash Co.</Text>
+      <View className="absolute left-5 items-center" style={{ top: 50 }}>
+        <Image 
+          source={require('../../assets/images/logo.png')} 
+          className="w-10 h-10"
+          style={{ resizeMode: 'contain' }}
+        />
+        <Text className="text-base font-medium mt-1">Velvet Leash Co.</Text>
       </View>
 
       {/* Sign In Button Top Right */}
-      <TouchableOpacity style={styles.signInButton}>
-        <Text style={styles.signInButtonText}>Sign In</Text>
+      <TouchableOpacity className="absolute right-5" style={{ top: 60 }}>
+        <Text className="text-base text-text font-semibold">Sign In</Text>
       </TouchableOpacity>
 
       {/* Vector Background */}
       <Image
         source={require('../../assets/images/Vector.png')}
-        style={styles.vectorBackground}
+        style={{
+          position: 'absolute',
+          top: height * 0.15,
+          width: width * 1.2,
+          height: height * 0.5,
+          resizeMode: 'contain',
+          zIndex: 1,
+          marginTop: 50,
+        }}
       />
 
       {/* Main illustration */}
-      <View style={styles.mainIllustrationContainer}>
-
-
+      <View className="items-center" style={{ marginTop: height * 0.18 }}>
         {/* Circles on top of house */}
-        <View style={styles.circlesContainer}>
-          <Image source={require('../../assets/images/human1.png')} style={styles.circleSmall} />
-          <Image source={require('../../assets/images/human2.png')} style={styles.circleMedium} />
-          <Image source={require('../../assets/images/human3.png')} style={styles.circleSmall} />
+        <View className="flex-row justify-center" style={{ marginTop: 100, zIndex: 999 }}>
+          <Image 
+            source={require('../../assets/images/human1.png')} 
+            className="rounded-full mx-2.5"
+            style={{ width: 60, height: 60 }}
+          />
+          <Image 
+            source={require('../../assets/images/human2.png')} 
+            className="rounded-full mx-2.5"
+            style={{ width: 90, height: 90 }}
+          />
+          <Image 
+            source={require('../../assets/images/human3.png')} 
+            className="rounded-full mx-2.5"
+            style={{ width: 60, height: 60 }}
+          />
         </View>
-                {/* House Illustration */}
+        
+        {/* House Illustration */}
         <Image
           source={require('../../assets/images/signin_illustration.png')}
-          style={styles.houseIllustration}
+          style={{
+            width: width * 0.9,
+            height: height * 0.75,
+            resizeMode: 'contain',
+            zIndex: 99
+          }}
         />
       </View>
 
       {/* Tagline */}
-      <Text style={styles.tagline}>
+      <Text className="text-3xl font-pacifico text-center my-5 text-text">
         Trusted pet care right{"\n"}around the corner
       </Text>
 
       {/* Buttons */}
-      <TouchableOpacity style={styles.findCareButton} onPress={() => navigation.navigate('Location')}>
-        <Text style={styles.findCareButtonText}>Find Pet care</Text>
+      <TouchableOpacity 
+        className="bg-primary py-4 px-12 rounded-3xl mb-4 items-center"
+        style={{ width: width * 0.8 }}
+        onPress={() => navigation.navigate('Location')}
+      >
+        <Text className="text-lightText text-lg font-bold">Find Pet care</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.createAccountButton}>
-        <Text style={styles.createAccountButtonText}>Create account</Text>
+      <TouchableOpacity 
+        className="bg-secondary py-4 px-12 rounded-3xl items-center"
+        style={{ width: width * 0.8, marginBottom: 400 }}
+      >
+        <Text className="text-text text-lg font-bold">Create account</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  logoContainer: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    alignItems: 'center',
-  },
-  logo: {
-    width: 40,
-    height: 40,
-    resizeMode: 'contain',
-  },
-  appName: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginTop: 5,
-  },
-  signInButton: {
-    position: 'absolute',
-    top: 60,
-    right: 20,
-  },
-  signInButtonText: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '600',
-  },
-  vectorBackground: {
-    position: 'absolute',
-    top: height * 0.15,
-    width: width * 1.2,  // make vector slightly overflow for full background effect
-    height: height * 0.5,
-    resizeMode: 'contain',
-    zIndex: 1,
-    marginTop: 50,
-  },
-  mainIllustrationContainer: {
-    marginTop: height * 0.18,
-    alignItems: 'center',
-  },
-  houseIllustration: {
-    width: width * 0.9,
-    height: height * 0.75,  // increased house size
-    resizeMode: 'contain',
-    zIndex: 99
-  },
-  circlesContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 100,
-    zIndex: 999
-  },
-  circleSmall: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginHorizontal: 10,
-  },
-  circleMedium: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    marginHorizontal: 10,
-  },
-  tagline: {
-    fontSize: 28,
-    fontFamily: 'Pacifico-Regular',
-    textAlign: 'center',
-    marginVertical: 20,
-    color: '#333',
-  },
-  findCareButton: {
-    backgroundColor: colors.primary,
-    paddingVertical: 15,
-    paddingHorizontal: 50,
-    borderRadius: 25,
-    marginBottom: 15,
-    width: width * 0.8,
-    alignItems: 'center',
-  },
-  findCareButtonText: {
-    color: colors.lightText,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  createAccountButton: {
-    backgroundColor: colors.secondary,
-    paddingVertical: 15,
-    paddingHorizontal: 50,
-    borderRadius: 25,
-    width: width * 0.8,
-    alignItems: 'center',
-    marginBottom: 400,
-  },
-  createAccountButtonText: {
-    color: colors.text,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default SignInScreen;

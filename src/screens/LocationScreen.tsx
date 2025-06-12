@@ -1,98 +1,46 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { useNavigation, NavigationProp } from '@react-navigation/native';
 import { RootStackParamList } from '../navigation/types';
-import { colors } from '../theme/theme';
 
 const LocationScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-background items-center px-5" style={{ paddingTop: 60 }}>
       {/* Cancel Button */}
-      <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.cancelButtonText}>Cancel</Text>
+      <TouchableOpacity className="absolute left-5 z-10" style={{ top: 60 }} onPress={() => navigation.goBack()}>
+        <Text className="text-base text-text">Cancel</Text>
       </TouchableOpacity>
 
       {/* Globe Illustration */}
       <Image
-        source={require('../../assets/images/globe_illustration.png')} // Placeholder for globe illustration
-        style={styles.globeIllustration}
+        source={require('../../assets/images/globe_illustration.png')}
+        className="w-36 h-36 mt-20 mb-10"
+        style={{ resizeMode: 'contain' }}
       />
 
       {/* Question Text */}
-      <Text style={styles.questionText}>Where are you looking for pet care?</Text>
+      <Text className="text-xl font-bold text-center mb-8 text-text">
+        Where are you looking for pet care?
+      </Text>
 
       {/* Search Location Input */}
       <TextInput
-        style={styles.locationInput}
+        className="w-11/12 py-4 px-5 rounded-3xl bg-secondary mb-8 text-base text-text"
         placeholder="Search Location"
-        placeholderTextColor={colors.text}
+        placeholderTextColor="#333333"
       />
 
       {/* Continue Button */}
-      <TouchableOpacity style={styles.continueButton} onPress={() => navigation.navigate('SkipScreen01')}>
-        <Text style={styles.continueButtonText}>Continue</Text>
+      <TouchableOpacity 
+        className="bg-primary py-4 px-12 rounded-3xl w-4/5 items-center" 
+        onPress={() => navigation.navigate('SkipScreen01')}
+      >
+        <Text className="text-lightText text-lg font-bold">Continue</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 60,
-  },
-  cancelButton: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    zIndex: 1,
-  },
-  cancelButtonText: {
-    fontSize: 16,
-    color: colors.text,
-  },
-  globeIllustration: {
-    width: 150,
-    height: 150,
-    resizeMode: 'contain',
-    marginTop: 80,
-    marginBottom: 40,
-  },
-  questionText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 30,
-    color: colors.text,
-  },
-  locationInput: {
-    width: '90%',
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-    borderRadius: 25,
-    backgroundColor: colors.secondary,
-    marginBottom: 30,
-    fontSize: 16,
-    color: colors.text,
-  },
-  continueButton: {
-    backgroundColor: colors.primary,
-    paddingVertical: 15,
-    paddingHorizontal: 50,
-    borderRadius: 25,
-    width: '80%',
-    alignItems: 'center',
-  },
-  continueButtonText: {
-    color: colors.lightText,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});
 
 export default LocationScreen; 
